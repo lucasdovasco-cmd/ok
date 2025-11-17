@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noviembre</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="catalogo-cabecalho">
+        <div class="container">
+            <img src="img/logo.jpeg" alt="Logo da Sua Marca" class="logo-cabecalho">
+            <h1>Catálogo Exclusivo</h1>
+            <h2>Selecciona las prendas que desees y haz clic en Finalizar Pedido.</h2>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <form id="form-pedido">
+            
+            <div class="catalogo-grid">
+                
+                <div class="produto-item">
+                    <input type="checkbox" id="item1" name="produto" value="1 x Bermuda Jeans Rip Curl (ARS$ 45.000,00)">
+                    <label for="item1">
+                        <img src="img/bermuda jeans 1.1 .JPG" alt="Bermuda Jeans Rip Curl" class="img-produto-catalogo">
+                        <div class="detalhes">
+                            <h3>Bermuda Jeans Rip Curl</h3>
+                            <p class="preco-catalogo">ARS$ 45.000,00</p>
+                            <p>Talle XL (Elástico)</p>
+                        </div>
+                    </label>
+                </div>
+                
+                <div class="produto-item destaque-oferta">
+                    <input type="checkbox" id="item2" name="produto" value="1 x Campera Lost (ARS$ 50.000,00)">
+                    <label for="item2">
+                        <img src="img/campera lost 1.1.JPG" alt="Campera Lost" class="img-produto-catalogo">
+                        <div class="detalhes">
+                            <h3>Campera Lost</h3>
+                            <p class="preco-catalogo preco-oferta">ARS$ 50.000,00</p>
+                            <p>Talle M</p>
+                        </div>
+                    </label>
+                </div>
+                
+                <div class="produto-item">
+                    <input type="checkbox" id="item3" name="produto" value="1 x Pantalon de Lino (ARS$ 39.900,00)">
+                    <label for="item3">
+                        <img src="img/Pantalon de Lino.JPG" alt="Pantalón de Lino" class="img-produto-catalogo">
+                        <div class="detalhes">
+                            <h3>Pantalón de Lino</h3>
+                            <p class="preco-catalogo">ARS$ 39.900,00</p>
+                            <p>Talle M y XL .</p>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="produto-item">
+                    <input type="checkbox" id="item4" name="produto" value="1 x Bermuda Infantil Rip Curl (ARS$ 40.000,00)">
+                    <label for="item4">
+                        <img src="img/bermuda infantil 1.1.JPG" alt="Bermuda Infantil Rip Curl" class="img-produto-catalogo">
+                        <div class="detalhes">
+                            <h3>Bermuda Infantil Rip Curl</h3>
+                            <p class="preco-catalogo">ARS$ 40.000,00</p>
+                            <p>Savage plain</p>
+                            <p>Talle 8 y 16</p>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="produto-item">
+                    <input type="checkbox" id="item5" name="produto" value="1 x Bermuda Táctica Rip Curl\ (ARS$ 55.000,00)">
+                    <label for="item5">
+                        <img src="img/bermuda tatica .JPG" alt="Bermuda Táctica Rip Curl" class="img-produto-catalogo">
+                        <div class="detalhes">
+                            <h3>Bermuda Táctica Rip Curl</h3>
+                            <p class="preco-catalogo">ARS$ 55.000,00</p>
+                            <p>Tela de paracaída</p>
+                            <p>Talle XL</p>
+                        </div>
+                    </label>
+                </div>
+
+            </div>
+            
+            <button type="button" id="enviar-wpp" class="btn-finalizar-pedido">
+                ✅ Finalizar Pedido y Enviar al Vendedor.
+            </button>
+        </form>
+    </main>
+
+    <footer class="rodape-catalogo">
+        <p>© 2025 Noviembre - Todos los derechos reservados</p>
+        <p>Comuníquese con nosotros para confirmar disponibilidad, métodos de pago y retirada.</p>
+    </footer>
+
+    <script>
+    document.getElementById('enviar-wpp').addEventListener('click', function() {
+        const itensSelecionados = document.querySelectorAll('#form-pedido input[name="produto"]:checked');
+        
+        if (itensSelecionados.length === 0) {
+            alert('Por favor, seleccione al menos un producto para finalizar el pedido.');
+            return;
+        }
+        
+        let mensagem = "¡Hola! Me gustaría hacer el siguiente pedido del catálogo:\n\n";
+        let total = 0;
+        
+        itensSelecionados.forEach(item => {
+            mensagem += "- " + item.value + "\n";
+            
+            // NOVO REGEX: Procura por uma sequência de números (que pode incluir pontos para milhar) seguida de uma vírgula e dois dígitos.
+            const precoMatch = item.value.match(/ARS\$ ([\d\.]+,\d{2})/);
+            
+            if (precoMatch) {
+                // 1. Pega a string do preço (ex: "45.000,00")
+                let precoStr = precoMatch[1];
+                
+                // 2. Remove o separador de milhar (ponto)
+                precoStr = precoStr.replace(/\./g, ''); 
+                
+                // 3. Substitui a vírgula pelo ponto decimal, permitindo o parseFloat
+                precoStr = precoStr.replace(',', '.');
+                
+                const precoNumerico = parseFloat(precoStr);
+                
+                if (!isNaN(precoNumerico)) {
+                    total += precoNumerico;
+                }
+            }
+        });
+        
+        // Formatação final do total
+        // 1. Formata para duas casas decimais
+        const totalFormatado = total.toFixed(2);
+        
+        // 2. Substitui o ponto decimal por vírgula para a exibição (formato ARS)
+        let totalDisplay = totalFormatado.replace('.', ',');
+
+        // 3. Adiciona separador de milhar (ponto) (ex: 180.000,00)
+        totalDisplay = totalDisplay.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        
+        mensagem += "\n-----------------------------------\n";
+        mensagem += "Valor Total (Estimado): ARS$ " + totalDisplay;
+        mensagem += "\n\n¡Esperamos su contacto para confirmar el pedido, el retiro y las formas de pago!";
+        
+        const numeroTelefone = '541125327373'; // Seu número de WhatsApp
+        const linkWPP = `https://wa.me/${numeroTelefone}?text=${encodeURIComponent(mensagem)}`;
+        
+        window.open(linkWPP, '_blank');
+    });
+</script>

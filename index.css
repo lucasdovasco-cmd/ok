@@ -1,0 +1,200 @@
+/* --- ESTILOS GERAIS --- */
+body {
+    font-family: 'arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #000000;
+    /* ESTA LINHA CONTROLA A COR DE FUNDO DE TUDO */
+    background-color: #ffffff; /* Provavelmente está com #f4f4f4 ou uma cor similar */
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* --- CABEÇALHO DO CATÁLOGO --- */
+.catalogo-cabecalho {
+    background-color: #1B2024; /* laranja Forte */
+    color: #ffffff;
+    padding: 30px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
+    .logo-cabecalho {
+    /* POSICIONAMENTO */
+    position:  solid; /* Para soltar o logo do fluxo do texto */
+    top: 15px;         /* Distância do topo */
+    left: 25px;       /* Distância da borda direita */
+
+    /* TAMANHO (Aproximadamente 3cm) */
+    width: 113px;      
+    height: 113px;     
+    
+    /* ARREDONDAMENTO */
+    border-radius: 50%; /* Torna a imagem perfeitamente redonda */
+    object-fit: cover;  /* Garante que a imagem preencha o círculo sem distorcer */
+    
+    /* EFEITO VISUAL */
+    border: 3px solid rgb(5, 0, 0); /* Borda branca para destacar o círculo (Opcional) */
+    z-index: 1001; /* Para garantir que o logo fique acima do texto */
+}
+    
+}
+
+.catalogo-cabecalho h1 {
+    font-size: 2.6rem;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.catalogo-cabecalho h2 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-top: 5px;
+}
+
+/* --- GRID E ITENS DO CATÁLOGO --- */
+.catalogo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    padding: 20px 0;
+}
+
+.produto-item {
+    border: 10px solid #ffffff;
+    border-radius: 10px;
+    background-color: #ffffff;
+    transition: box-shadow 0.3s, transform 0.2s;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.produto-item:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Esconde o checkbox padrão */
+.produto-item input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 10; /* Fica acima de tudo para ser clicável */
+}
+
+.produto-item label {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    cursor: pointer;
+    height: 100%;
+}
+
+.img-produto-catalogo {
+    width: 100%;
+    height: 250px; /* Altura fixa para as imagens */
+    object-fit: contain;
+    /* ESSA É A NOVIDADE: Adiciona uma margem de 15px ao redor da imagem */
+    margin: 10px; 
+    
+    /* ESSA É A CORREÇÃO: Reduz o tamanho real da imagem para compensar a margem */
+    width: calc(100% - 30px); /* 100% menos 15px de cada lado (30px) */
+    display: block;
+    border-bottom: 0px solid #000000;
+}
+
+.detalhes {
+    padding: 15px;
+    text-align: left;
+    flex-grow: 1;
+}
+
+.detalhes h3 {
+    margin: 10px 0 5px 0;
+    font-size: 0.9rem;
+    color: #000000;
+    /* Adicione ou modifique a linha abaixo: */
+    font-weight: normal; /* Sem negrito */
+    /* ... outros estilos ... */
+}
+.produto-item p {
+    /* ESTE BLOCO CONTROLA O ESTILO DE "Talle XL (Elástico)" */
+    font-size: 0.9rem; /* Mude este valor para alterar o tamanho */
+    color: #333;    /* Mude esta cor se quiser */
+    /* ... outros estilos ... */
+}
+
+.preco-catalogo {
+    font-size: 0.9rem;
+    font-weight: 10;
+    color: #04a009; /* Verde do preço */
+    margin: 5px 0 10px 0;
+}
+
+.preco-oferta {
+    color: #4CAF50; /* Vermelho para ofertas */
+}
+
+/* --- ESTILO QUANDO SELECIONADO --- */
+.produto-item input[type="checkbox"]:checked + label {
+    border: 4px solid #008000; /* Borda verde ao selecionar */
+    box-shadow: 0 0 15px rgba(0, 128, 0, 0.5);
+    background-color: #f0fff0;
+}
+
+.produto-item.destaque-oferta {
+    border-color: #ffffff;
+}
+
+/* --- BOTÃO FINALIZAR PEDIDO (WhatsApp) --- */
+.btn-finalizar-pedido {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    background-color: #25D366; /* Cor do WhatsApp */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 40px 0;
+    transition: background-color 0.3s;
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+}
+
+.btn-finalizar-pedido:hover {
+    background-color: #128C7E;
+}
+
+/* --- RODAPÉ --- */
+.rodape-catalogo {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #333;
+    color: #fff;
+    font-size: 0.9rem;
+    border-top: 10px solid #444;
+}
+
+.rodape-catalogo p {
+    margin: 10px 0;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .catalogo-cabecalho h1 {
+        font-size: 2rem;
+    }
+    .catalogo-grid {
+        grid-template-columns: 1fr;
+    }
+}
